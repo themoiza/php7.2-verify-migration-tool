@@ -2,12 +2,12 @@
 <?php
 
 /*{
-"VERSION": 1.10,
+"VERSION": 1.11,
 "AUTHOR": "MOISES DE LIMA",
-"UPDATE": "17/06/2018"
+"UPDATE": "24/07/2018"
 }*/
 
-$open = '/home/yourproject';
+$open = '/home/project';
 
 /**
 * FIND METHODS WITH SAME NAME OF YOUR CLASS
@@ -67,6 +67,54 @@ class Scan{
 					$count = $count + 1;
 
 					print 'LINE: '.($ct + 1).' - __autoload IS DEPRECATED IN '.$currentFile.PHP_EOL;
+				}
+			}
+		}
+
+		return $count;
+	}
+
+	function fn_png2wbmp($currentFile, $count){
+
+		if(is_file($currentFile)){
+
+			$php = file_get_contents($currentFile);
+
+			$lines = $this->__getLines($php);
+
+			foreach ($lines as $ct => $line){
+
+				preg_match('/[\s\t]+?png2wbmp[\s\t\n]?\(/', $line, $preg);
+
+				if(!empty($preg)){
+
+					$count = $count + 1;
+
+					print 'LINE: '.($ct + 1).' - png2wbmp() IS DEPRECATED IN '.$currentFile.PHP_EOL;
+				}
+			}
+		}
+
+		return $count;
+	}
+
+	function fn_jpeg2wbmp($currentFile, $count){
+
+		if(is_file($currentFile)){
+
+			$php = file_get_contents($currentFile);
+
+			$lines = $this->__getLines($php);
+
+			foreach ($lines as $ct => $line){
+
+				preg_match('/[\s\t]+?jpeg2wbmp[\s\t\n]?\(/', $line, $preg);
+
+				if(!empty($preg)){
+
+					$count = $count + 1;
+
+					print 'LINE: '.($ct + 1).' - jpeg2wbmp() IS DEPRECATED IN '.$currentFile.PHP_EOL;
 				}
 			}
 		}
@@ -170,6 +218,54 @@ class Scan{
 		return $count;
 	}
 
+	function fn_md5($currentFile, $count){
+
+		if(is_file($currentFile)){
+
+			$php = file_get_contents($currentFile);
+
+			$lines = $this->__getLines($php);
+
+			foreach ($lines as $ct => $line){
+
+				preg_match('/[\s\t]+?md5[\s\t\n]?\(/', $line, $preg);
+
+				if(!empty($preg)){
+
+					$count = $count + 1;
+
+					print 'LINE: '.($ct + 1).' - md5() FUNCTION CAN BE DEPRECATED IN 7.3 OR 8'.$currentFile.PHP_EOL;
+				}
+			}
+		}
+
+		return $count;
+	}
+
+	function fn_strip_tags($currentFile, $count){
+
+		if(is_file($currentFile)){
+
+			$php = file_get_contents($currentFile);
+
+			$lines = $this->__getLines($php);
+
+			foreach ($lines as $ct => $line){
+
+				preg_match('/[\s\t]+?strip_tags[\s\t\n]?\(/', $line, $preg);
+
+				if(!empty($preg)){
+
+					$count = $count + 1;
+
+					print 'LINE: '.($ct + 1).' - strip_tags() FUNCTION CAN BE DEPRECATED IN 7.3 OR 8'.$currentFile.PHP_EOL;
+				}
+			}
+		}
+
+		return $count;
+	}
+
 	function scanphp($open, $count){
 
 		$list = scandir($open);
@@ -184,12 +280,18 @@ class Scan{
 
 				if(preg_match('/\.php/', $files)){
 
-					$count = $this->auto_load($currentFile, $count);
+					/*$count = $this->auto_load($currentFile, $count);
 					$count = $this->classnamemethod($currentFile, $count);
+					$count = $this->fn_png2wbmp($currentFile, $count);
+					$count = $this->fn_jpeg2wbmp($currentFile, $count);
 					$count = $this->fn_each($currentFile, $count);
 					$count = $this->fn_create_function($currentFile, $count);
 					$count = $this->fn_gmp_random($currentFile, $count);
-					$count = $this->fn_read_exif_data($currentFile, $count);
+					$count = $this->fn_read_exif_data($currentFile, $count);*/
+
+					// WARNING
+					$count = $this->fn_md5($currentFile, $count);
+					$count = $this->fn_strip_tags($currentFile, $count);
 				}
 
 				// SUBDIR
