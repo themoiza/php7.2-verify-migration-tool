@@ -1,9 +1,9 @@
 <?php
 
 /*{
-"VERSION": 1.11,
+"VERSION": 1.12,
 "AUTHOR": "MOISES DE LIMA",
-"UPDATE": "24/07/2018"
+"UPDATE": "11/08/2018"
 }*/
 
 class Warnings{
@@ -26,6 +26,8 @@ class Warnings{
 
 					$string = 'LINE: '.($ct + 1).' - md5() FUNCTION CAN BE DEPRECATED IN 7.3 OR 8'.$currentFile;
 
+					$this->report($string);
+
 					print $this->colors->getColoredString($string, "black", "yellow").PHP_EOL;
 
 				}
@@ -45,13 +47,15 @@ class Warnings{
 
 			foreach ($lines as $ct => $line){
 
-				preg_match('/[\s\t]+?strip_tags[\s\t\n]?\(/', $line, $preg);
+				preg_match('/strip_tags[\s\t\n]?\(/', $line, $preg);
 
 				if(!empty($preg)){
 
 					$count = $count + 1;
 
 					$string = 'LINE: '.($ct + 1).' - strip_tags() FUNCTION CAN BE DEPRECATED IN 7.3 OR 8'.$currentFile;
+
+					$this->report($string);
 
 					print $this->colors->getColoredString($string, "black", "yellow").PHP_EOL;
 

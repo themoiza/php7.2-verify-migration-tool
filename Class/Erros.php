@@ -1,9 +1,9 @@
 <?php
 
 /*{
-"VERSION": 1.11,
+"VERSION": 1.12,
 "AUTHOR": "MOISES DE LIMA",
-"UPDATE": "24/07/2018"
+"UPDATE": "11/08/2018"
 }*/
 
 include 'Warnings.php';
@@ -32,7 +32,12 @@ class Erros extends Warnings{
 
 						$string = 'LINE: '.($ct + 1).' - METHODS WITH SAME NAME OF YOUR CLASS IN '.$currentFile;
 
-						print $this->colors->getColoredString($string, "black", "magenta").PHP_EOL;
+						$this->report($string);
+
+						$howtosolve = 'Rename your class name ou funcion name to fix it.';
+
+						print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
 
 					}
 				}
@@ -58,62 +63,14 @@ class Erros extends Warnings{
 
 					$count = $count + 1;
 
-					$string = 'LINE: '.($ct + 1).' - __autoload IS DEPRECATED IN'.$currentFile;
+					$string = 'LINE: '.($ct + 1).' - __autoload IS DEPRECATED IN '.$currentFile;
 
-					print $this->colors->getColoredString($string, "black", "magenta").PHP_EOL;
-				}
-			}
-		}
+					$this->report($string);
 
-		return $count;
-	}
+					$howtosolve = 'You can use spl_autoload_register() to fix it.';
 
-	function fn_png2wbmp($currentFile, $count){
-
-		if(is_file($currentFile)){
-
-			$php = file_get_contents($currentFile);
-
-			$lines = $this->__getLines($php);
-
-			foreach ($lines as $ct => $line){
-
-				preg_match('/[\s\t]+?png2wbmp[\s\t\n]?\(/', $line, $preg);
-
-				if(!empty($preg)){
-
-					$count = $count + 1;
-
-					$string = 'LINE: '.($ct + 1).' - png2wbmp() IS DEPRECATED IN '.$currentFile;
-
-					print $this->colors->getColoredString($string, "black", "magenta").PHP_EOL;
-
-				}
-			}
-		}
-
-		return $count;
-	}
-
-	function fn_jpeg2wbmp($currentFile, $count){
-
-		if(is_file($currentFile)){
-
-			$php = file_get_contents($currentFile);
-
-			$lines = $this->__getLines($php);
-
-			foreach ($lines as $ct => $line){
-
-				preg_match('/[\s\t]+?jpeg2wbmp[\s\t\n]?\(/', $line, $preg);
-
-				if(!empty($preg)){
-
-					$count = $count + 1;
-
-					$string = 'LINE: '.($ct + 1).' - jpeg2wbmp() IS DEPRECATED IN '.$currentFile;
-
-					print $this->colors->getColoredString($string, "black", "magenta").PHP_EOL;
+					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
 
 				}
 			}
@@ -140,7 +97,79 @@ class Erros extends Warnings{
 
 					$string = 'LINE: '.($ct + 1).' - each() FUNCTION IS DEPRECATED IN '.$currentFile;
 
-					print $this->colors->getColoredString($string, "black", "magenta").PHP_EOL;
+					$howtosolve = 'You can use foreach() to fix it.';
+
+					$this->report($string);
+
+					$howtosolve = 'I don\'t know.';
+
+					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+				}
+			}
+		}
+
+		return $count;
+	}
+
+	function fn_png2wbmp($currentFile, $count){
+
+		if(is_file($currentFile)){
+
+			$php = file_get_contents($currentFile);
+
+			$lines = $this->__getLines($php);
+
+			foreach ($lines as $ct => $line){
+
+				preg_match('/png2wbmp[\s\t\n]?\(/', $line, $preg);
+
+				if(!empty($preg)){
+
+					$count = $count + 1;
+
+					$string = 'LINE: '.($ct + 1).' - png2wbmp() IS DEPRECATED IN '.$currentFile;
+
+					$this->report($string);
+
+					$howtosolve = 'I don\'t know.';
+
+					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+				}
+			}
+		}
+
+		return $count;
+	}
+
+	function fn_jpeg2wbmp($currentFile, $count){
+
+		if(is_file($currentFile)){
+
+			$php = file_get_contents($currentFile);
+
+			$lines = $this->__getLines($php);
+
+			foreach ($lines as $ct => $line){
+
+				preg_match('/jpeg2wbmp[\s\t\n]?\(/', $line, $preg);
+
+				if(!empty($preg)){
+
+					$count = $count + 1;
+
+					$string = 'LINE: '.($ct + 1).' - jpeg2wbmp() IS DEPRECATED IN '.$currentFile;
+
+					$this->report($string);
+
+					$howtosolve = 'I don\'t know.';
+
+					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
 				}
 			}
 		}
@@ -158,7 +187,7 @@ class Erros extends Warnings{
 
 			foreach ($lines as $ct => $line){
 
-				preg_match('/[\s\t]+?create_function[\s\t\n]?\(/', $line, $preg);
+				preg_match('/create_function[\s\t\n]?\(/', $line, $preg);
 
 				if(!empty($preg)){
 
@@ -166,7 +195,12 @@ class Erros extends Warnings{
 
 					$string = 'LINE: '.($ct + 1).' - create_function() FUNCTION IS DEPRECATED IN '.$currentFile;
 
-					print $this->colors->getColoredString($string, "black", "magenta").PHP_EOL;
+					$this->report($string);
+
+					$howtosolve = 'I don\'t know.';
+
+					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
 				}
 			}
 		}
@@ -184,7 +218,7 @@ class Erros extends Warnings{
 
 			foreach ($lines as $ct => $line){
 
-				preg_match('/[\s\t]+?create_function[\s\t\n]?\(/', $line, $preg);
+				preg_match('/fn_gmp_random[\s\t\n]?\(/', $line, $preg);
 
 				if(!empty($preg)){
 
@@ -192,7 +226,12 @@ class Erros extends Warnings{
 
 					$string = 'LINE: '.($ct + 1).' - gmp_random() FUNCTION IS DEPRECATED IN '.$currentFile;
 
-					print $this->colors->getColoredString($string, "black", "magenta").PHP_EOL;
+					$this->report($string);
+
+					$howtosolve = 'I don\'t know.';
+
+					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
 
 				}
 			}
@@ -211,14 +250,19 @@ class Erros extends Warnings{
 
 			foreach ($lines as $ct => $line){
 
-				preg_match('/[\s\t]+?read_exif_data[\s\t\n]?\(/', $line, $preg);
+				preg_match('/read_exif_data[\s\t\n]?\(/', $line, $preg);
 
 				if(!empty($preg)){
 
 					$count = $count + 1;
-					$string = 'LINE: '.($ct + 1).' - fn_read_exif_data() FUNCTION IS DEPRECATED IN '.$currentFile;
+					$string = 'LINE: '.($ct + 1).' - read_exif_data() FUNCTION IS DEPRECATED IN '.$currentFile;
 
-					print $this->colors->getColoredString($string, "black", "magenta").PHP_EOL;
+					$this->report($string);
+
+					$howtosolve = 'I don\'t know.';
+
+					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
 
 				}
 			}

@@ -1,5 +1,11 @@
 <?php
 
+/*{
+"VERSION": 1.00,
+"AUTHOR": "MOISES DE LIMA",
+"UPDATE": "11/08/2018"
+}*/
+
 class Colors {
 
 	private $foreground_colors = array();

@@ -2,12 +2,14 @@
 <?php
 
 /*{
-"VERSION": 1.11,
+"VERSION": 1.12,
 "AUTHOR": "MOISES DE LIMA",
-"UPDATE": "24/07/2018"
+"UPDATE": "11/08/2018"
 }*/
 
-$open = '/home/gestor';
+// https://github.com/themoiza/php7.2-verify-migration-tool
+
+$open = '/home/php72tool/php7.2-verify-migration-tool/olphpexamples';
 
 /**
 * FIND METHODS WITH SAME NAME OF YOUR CLASS
@@ -19,6 +21,8 @@ class Scan extends Erros{
 
 	public $colors;
 
+	public $report = array();
+
 	function __construct(){
 
 		include 'Class/Colors.php';
@@ -29,6 +33,22 @@ class Scan extends Erros{
 	protected function  __getLines($str){
 
 		return explode(PHP_EOL, $str);
+
+	}
+
+	// ADD LINE TO ARRAY
+	function report($newlog){
+
+		$this->report[] = $newlog;
+
+	}
+
+	// SAVE JSON TO FILE
+	function reportsave(){
+
+		$report = json_encode($this->report);
+
+		file_put_contents('report.md', $report);
 
 	}
 
@@ -61,7 +81,7 @@ class Scan extends Erros{
 					$count = $this->fn_strip_tags($currentFile, $count);
 				}
 
-				// SUBDIR
+				// SUBDIR RECURSIVE
 				if(is_dir($currentFile)){
 					$count = $this->scanphp($currentFile, $count);
 				}
@@ -72,6 +92,7 @@ class Scan extends Erros{
 	}
 }
 
+// TOUCH FILE IF NOT EXISTS
 $report = 'report.md';
 if(!is_file($report)){
 	touch($report);
@@ -79,3 +100,5 @@ if(!is_file($report)){
 
 $scan = new Scan;
 $count = $scan->scanphp($open, 0);
+
+$scan->reportsave();
