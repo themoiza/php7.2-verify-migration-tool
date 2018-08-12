@@ -2,9 +2,9 @@
 <?php
 
 /*{
-"VERSION": 1.12,
+"VERSION": 1.13,
 "AUTHOR": "MOISES DE LIMA",
-"UPDATE": "11/08/2018"
+"UPDATE": "12/08/2018"
 }*/
 
 // https://github.com/themoiza/php7.2-verify-migration-tool
@@ -76,9 +76,18 @@ class Scan extends Erros{
 					$count = $this->fn_gmp_random($currentFile, $count);
 					$count = $this->fn_read_exif_data($currentFile, $count);
 
+					// NOT PDO FUNCTIONS
+					$count = $this->fn_mysql_select_db($currentFile, $count);
+					$count = $this->fn_mysql_select_db($currentFile, $count);
+					$count = $this->fn_mysql_query($currentFile, $count);
+					$count = $this->fn_mysql_num_rows($currentFile, $count);
+					$count = $this->fn_mysql_result($currentFile, $count);
+
 					// WARNINGS
 					$count = $this->fn_md5($currentFile, $count);
 					$count = $this->fn_strip_tags($currentFile, $count);
+					$count = $this->fn_endphptag($currentFile, $count);
+
 				}
 
 				// SUBDIR RECURSIVE
@@ -89,6 +98,13 @@ class Scan extends Erros{
 		}
 
 		return $count;
+	}
+
+	function ending(){
+
+		$all = count($this->report).' errors or warnings';
+
+		print $this->colors->getColoredString('END: ', "white", "blue").' '.$all.PHP_EOL.PHP_EOL;
 	}
 }
 
@@ -102,3 +118,4 @@ $scan = new Scan;
 $count = $scan->scanphp($open, 0);
 
 $scan->reportsave();
+$scan->ending();

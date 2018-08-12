@@ -1,9 +1,9 @@
 <?php
 
 /*{
-"VERSION": 1.12,
+"VERSION": 1.13,
 "AUTHOR": "MOISES DE LIMA",
-"UPDATE": "11/08/2018"
+"UPDATE": "12/08/2018"
 }*/
 
 class Warnings{
@@ -28,7 +28,10 @@ class Warnings{
 
 					$this->report($string);
 
-					print $this->colors->getColoredString($string, "black", "yellow").PHP_EOL;
+					$howtosolve = 'Follow the news of PHP.';
+
+					print $this->colors->getColoredString('WARNING', 'black', 'yellow').' '.$string.PHP_EOL;
+					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
 
 				}
 			}
@@ -57,7 +60,42 @@ class Warnings{
 
 					$this->report($string);
 
-					print $this->colors->getColoredString($string, "black", "yellow").PHP_EOL;
+					$howtosolve = 'Follow the news of PHP.';
+
+					print $this->colors->getColoredString('WARNING', 'black', 'yellow').' '.$string.PHP_EOL;
+					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+				}
+			}
+		}
+
+		return $count;
+	}
+
+	function fn_endphptag($currentFile, $count){
+
+		if(is_file($currentFile)){
+
+			$php = file_get_contents($currentFile);
+
+			$lines = $this->__getLines($php);
+
+			foreach ($lines as $ct => $line){
+
+				preg_match('/\?>/', $line, $preg);
+
+				if(!empty($preg)){
+
+					$count = $count + 1;
+
+					$string = 'LINE: '.($ct + 1).' - DO NOT END YOUR PHP 7.2 WITH ?> TAG'.$currentFile;
+
+					$this->report($string);
+
+					$howtosolve = 'Stop merge html into PHP.';
+
+					print $this->colors->getColoredString('WARNING', 'black', 'yellow').' '.$string.PHP_EOL;
+					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
 
 				}
 			}
