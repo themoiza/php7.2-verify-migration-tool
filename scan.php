@@ -12,9 +12,8 @@
 $open = '/home/php72tool/php7.2-verify-migration-tool/olphpexamples';
 
 /**
-* FIND METHODS WITH SAME NAME OF YOUR CLASS
+* PARAMETERS PASS BY SHELL
 */
-
 $parameters = $argv;
 
 include 'Class/Erros.php';
@@ -42,6 +41,38 @@ class Scan extends Erros{
 
 	}
 
+	protected function _findParam($param){
+
+		if(is_array($this->parameters) and count($this->parameters) > 0){
+
+			foreach ($this->parameters as $p){
+				if(str_replace('"', '', $p) == $param){
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	protected function _findDir(){
+
+		if(is_array($this->parameters) and count($this->parameters) > 0){
+
+			foreach ($this->parameters as $p){
+				if(preg_match('/dir=/', str_replace('"', '', $p))){
+
+					preg_match('/dir=(.*)/', str_replace('"', '', $p), $preg);
+					if(isset($preg[1]) and !empty($preg[1]) and is_dir($preg[1])){
+						return $preg[1];
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
 	// ADD LINE TO ARRAY
 	function report($newlog){
 
@@ -60,6 +91,11 @@ class Scan extends Erros{
 
 	function scanphp($open, $count){
 
+		$findDir = $this->_findDir();
+		if($findDir !== false){
+			$open = $findDir;
+		}
+
 		$list = scandir($open);
 
 		$cleanPath = rtrim($open, '/').'/';
@@ -73,7 +109,7 @@ class Scan extends Erros{
 				if(preg_match('/\.php/', $files)){
 
 					// ERRORS
-					if(!isset($this->parameters[1]) or ($this->parameters[1] == 'all' or $this->parameters[1] == 'e')){
+					if($this->_findParam('./scan.php') === true or $this->_findParam('all') === true or $this->_findParam('e') === true){
 
 						$count = $this->auto_load($currentFile, $count);
 						$count = $this->classnamemethod($currentFile, $count);
@@ -94,7 +130,7 @@ class Scan extends Erros{
 					}
 
 					// WARNINGS
-					if(isset($this->parameters[1]) and ($this->parameters[1] == 'all' or $this->parameters[1] == 'w')){
+					if($this->_findParam('all') === true or $this->_findParam('w') === true){
 
 						$count = $this->fn_md5($currentFile, $count);
 						$count = $this->fn_strip_tags($currentFile, $count);
