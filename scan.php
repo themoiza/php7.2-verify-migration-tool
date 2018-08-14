@@ -2,9 +2,9 @@
 <?php
 
 /*{
-"VERSION": 1.13,
+"VERSION": 1.14,
 "AUTHOR": "MOISES DE LIMA",
-"UPDATE": "12/08/2018"
+"UPDATE": "14/08/2018"
 }*/
 
 // https://github.com/themoiza/php7.2-verify-migration-tool
@@ -15,6 +15,8 @@ $open = '/home/php72tool/php7.2-verify-migration-tool/olphpexamples';
 * FIND METHODS WITH SAME NAME OF YOUR CLASS
 */
 
+$parameters = $argv;
+
 include 'Class/Erros.php';
 
 class Scan extends Erros{
@@ -23,9 +25,13 @@ class Scan extends Erros{
 
 	public $report = array();
 
-	function __construct(){
+	public $parameters = array();
+
+	function __construct($parameters){
 
 		include 'Class/Colors.php';
+
+		$this->parameters = $parameters;
 
 		$this->colors = new Colors;
 	}
@@ -67,27 +73,34 @@ class Scan extends Erros{
 				if(preg_match('/\.php/', $files)){
 
 					// ERRORS
-					$count = $this->auto_load($currentFile, $count);
-					$count = $this->classnamemethod($currentFile, $count);
-					$count = $this->fn_png2wbmp($currentFile, $count);
-					$count = $this->fn_jpeg2wbmp($currentFile, $count);
-					$count = $this->fn_each($currentFile, $count);
-					$count = $this->fn_create_function($currentFile, $count);
-					$count = $this->fn_gmp_random($currentFile, $count);
-					$count = $this->fn_read_exif_data($currentFile, $count);
+					if(!isset($this->parameters[1]) or ($this->parameters[1] == 'all' or $this->parameters[1] == 'e')){
 
-					// NOT PDO FUNCTIONS
-					$count = $this->fn_mysql_select_db($currentFile, $count);
-					$count = $this->fn_mysql_select_db($currentFile, $count);
-					$count = $this->fn_mysql_query($currentFile, $count);
-					$count = $this->fn_mysql_num_rows($currentFile, $count);
-					$count = $this->fn_mysql_result($currentFile, $count);
+						$count = $this->auto_load($currentFile, $count);
+						$count = $this->classnamemethod($currentFile, $count);
+						$count = $this->fn_png2wbmp($currentFile, $count);
+						$count = $this->fn_jpeg2wbmp($currentFile, $count);
+						$count = $this->fn_each($currentFile, $count);
+						$count = $this->fn_create_function($currentFile, $count);
+						$count = $this->fn_gmp_random($currentFile, $count);
+						$count = $this->fn_read_exif_data($currentFile, $count);
+
+						// NOT PDO FUNCTIONS
+						$count = $this->fn_mysql_select_db($currentFile, $count);
+						$count = $this->fn_mysql_select_db($currentFile, $count);
+						$count = $this->fn_mysql_query($currentFile, $count);
+						$count = $this->fn_mysql_num_rows($currentFile, $count);
+						$count = $this->fn_mysql_result($currentFile, $count);
+
+					}
 
 					// WARNINGS
-					$count = $this->fn_md5($currentFile, $count);
-					$count = $this->fn_strip_tags($currentFile, $count);
-					$count = $this->fn_endphptag($currentFile, $count);
+					if(isset($this->parameters[1]) and ($this->parameters[1] == 'all' or $this->parameters[1] == 'w')){
 
+						$count = $this->fn_md5($currentFile, $count);
+						$count = $this->fn_strip_tags($currentFile, $count);
+						$count = $this->fn_endphptag($currentFile, $count);
+
+					}
 				}
 
 				// SUBDIR RECURSIVE
@@ -114,7 +127,7 @@ if(!is_file($report)){
 	touch($report);
 }
 
-$scan = new Scan;
+$scan = new Scan($parameters);
 $count = $scan->scanphp($open, 0);
 
 $scan->reportsave();

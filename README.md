@@ -9,3 +9,23 @@ How to execute:
 ```sh
 ./scan.php
 ```
+
+No parameters: scan only erros
+```sh
+./scan.php
+```
+
+e: scan only erros
+```sh
+./scan.php w
+```
+
+w: scan only warnings
+```sh
+./scan.php w
+```
+
+all: scan all
+```sh
+./scan.php all
+```
