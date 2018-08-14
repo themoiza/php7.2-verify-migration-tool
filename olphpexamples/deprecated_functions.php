@@ -9,3 +9,5 @@ create_function();
 gmp_random();
 
 read_exif_data();
+
+list($a, $b) = each($array);

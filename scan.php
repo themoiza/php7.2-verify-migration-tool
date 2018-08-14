@@ -2,7 +2,7 @@
 <?php
 
 /*{
-"VERSION": 1.14,
+"VERSION": 1.15,
 "AUTHOR": "MOISES DE LIMA",
 "UPDATE": "14/08/2018"
 }*/
@@ -22,7 +22,9 @@ class Scan extends Erros{
 
 	public $colors;
 
-	public $report = array();
+	public $reportErrors = array();
+
+	public $reportWarnings = array();
 
 	public $parameters = array();
 
@@ -74,16 +76,23 @@ class Scan extends Erros{
 	}
 
 	// ADD LINE TO ARRAY
-	function report($newlog){
+	function reportErrors($newlog){
 
-		$this->report[] = $newlog;
+		$this->reportErrors[] = $newlog;
+
+	}
+
+	// ADD LINE TO ARRAY
+	function reportWarnings($newlog){
+
+		$this->reportWarnings[] = $newlog;
 
 	}
 
 	// SAVE JSON TO FILE
 	function reportsave(){
 
-		$report = json_encode($this->report);
+		$report = json_encode(array_merge($this->reportErrors, $this->reportWarnings));
 
 		file_put_contents('report.md', $report);
 
@@ -104,7 +113,7 @@ class Scan extends Erros{
 				if(preg_match('/\.php/', $files)){
 
 					// ERRORS
-					if($this->_findParam('./scan.php') === true or $this->_findParam('all') === true or $this->_findParam('e') === true){
+					if($this->_findParam('all') === true or ($this->_findParam('dir') === false and $this->_findParam('w') === false)){
 
 						$count = $this->auto_load($currentFile, $count);
 						$count = $this->classnamemethod($currentFile, $count);
@@ -146,16 +155,16 @@ class Scan extends Erros{
 
 	function ending(){
 
-		$all = count($this->report).' errors or warnings';
+		$all = count($this->reportErrors).' errors, '.count($this->reportWarnings).' warnings';
 
 		print $this->colors->getColoredString('END: ', "white", "blue").' '.$all.PHP_EOL.PHP_EOL;
 	}
 }
 
 // TOUCH FILE IF NOT EXISTS
-$report = 'report.md';
-if(!is_file($report)){
-	touch($report);
+$reportFile = 'report.md';
+if(!is_file($reportFile)){
+	touch($reportFile);
 }
 
 $scan = new Scan($parameters);

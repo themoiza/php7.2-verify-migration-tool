@@ -1,9 +1,9 @@
 <?php
 
 /*{
-"VERSION": 1.13,
+"VERSION": 1.14,
 "AUTHOR": "MOISES DE LIMA",
-"UPDATE": "12/08/2018"
+"UPDATE": "14/08/2018"
 }*/
 
 class Warnings{
@@ -26,7 +26,7 @@ class Warnings{
 
 					$string = 'LINE: '.($ct + 1).' - md5() FUNCTION CAN BE DEPRECATED IN 7.3 OR 8'.$currentFile;
 
-					$this->report($string);
+					$this->reportWarnings($string);
 
 					$howtosolve = 'Follow the news of PHP.';
 
@@ -58,7 +58,7 @@ class Warnings{
 
 					$string = 'LINE: '.($ct + 1).' - strip_tags() FUNCTION CAN BE DEPRECATED IN 7.3 OR 8'.$currentFile;
 
-					$this->report($string);
+					$this->reportWarnings($string);
 
 					$howtosolve = 'Follow the news of PHP.';
 
@@ -90,7 +90,7 @@ class Warnings{
 
 					$string = 'LINE: '.($ct + 1).' - DO NOT END YOUR PHP 7.2 WITH ?> TAG'.$currentFile;
 
-					$this->report($string);
+					$this->reportWarnings($string);
 
 					$howtosolve = 'Stop merge html into PHP.';
 
