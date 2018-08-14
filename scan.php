@@ -55,7 +55,7 @@ class Scan extends Erros{
 		return false;
 	}
 
-	protected function _findDir(){
+	function findDir(){
 
 		if(is_array($this->parameters) and count($this->parameters) > 0){
 
@@ -90,11 +90,6 @@ class Scan extends Erros{
 	}
 
 	function scanphp($open, $count){
-
-		$findDir = $this->_findDir();
-		if($findDir !== false){
-			$open = $findDir;
-		}
 
 		$list = scandir($open);
 
@@ -164,6 +159,12 @@ if(!is_file($report)){
 }
 
 $scan = new Scan($parameters);
+
+$findDir = $scan->findDir();
+if($findDir !== false){
+	$open = $findDir;
+}
+
 $count = $scan->scanphp($open, 0);
 
 $scan->reportsave();
