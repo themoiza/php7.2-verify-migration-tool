@@ -2,9 +2,9 @@
 <?php
 
 /*{
-"VERSION": 1.15,
+"VERSION": 1.16,
 "AUTHOR": "MOISES DE LIMA",
-"UPDATE": "15/08/2018"
+"UPDATE": "16/08/2018"
 "GITHUB" : "https://github.com/themoiza/php7.2-verify-migration-tool"
 }*/
 
@@ -61,14 +61,12 @@ class Scan extends Erros{
 
 		if(is_array($this->parameters) and count($this->parameters) > 0){
 
-			foreach ($this->parameters as $p){
-				if(preg_match('/dir=/', str_replace('"', '', $p))){
+			if(isset($this->parameters[1]) and !empty($this->parameters) and preg_match('/\//', $this->parameters[1])){
 
-					preg_match('/dir=(.*)/', str_replace('"', '', $p), $preg);
-					if(isset($preg[1]) and !empty($preg[1]) and is_dir($preg[1])){
-						return $preg[1];
-					}
-				}
+				$dir = str_replace('"', '', trim($this->parameters[1]));
+				$dir = preg_replace('/\/$/', '', $dir);
+
+				return $dir;
 			}
 		}
 

@@ -17,9 +17,9 @@ No parameters: scan only erros
 ./scan.php
 ```
 
-dir: set dir to scan
+set dir to scan, 1st param
 ```sh
-./scan.php dir=/home/yourproject
+./scan.php /home/yourproject
 ```
 
 e: scan only erros
