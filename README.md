@@ -9,7 +9,7 @@ chmod +x scan.php
 ```
 How to execute:
 ```sh
-./scan.php
+./scan.php /home/yourproject e
 ```
 
 No parameters: scan only erros
@@ -24,7 +24,7 @@ set dir to scan, 1st param
 
 e: scan only erros
 ```sh
-./scan.php w
+./scan.php e
 ```
 
 w: scan only warnings
