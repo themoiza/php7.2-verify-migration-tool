@@ -4,12 +4,12 @@
 /*{
 "VERSION": 1.15,
 "AUTHOR": "MOISES DE LIMA",
-"UPDATE": "14/08/2018"
+"UPDATE": "15/08/2018"
+"GITHUB" : "https://github.com/themoiza/php7.2-verify-migration-tool"
 }*/
 
-// https://github.com/themoiza/php7.2-verify-migration-tool
 
-$open = '/home/php72tool/php7.2-verify-migration-tool/olphpexamples';
+$open = '/home/php72tool/php7.2-verify-migration-tool/oldphpexamples';
 
 /**
 * PARAMETERS PASS BY SHELL
@@ -76,25 +76,83 @@ class Scan extends Erros{
 	}
 
 	// ADD LINE TO ARRAY
-	function reportErrors($newlog){
+	function reportErrors($newlog, $solve, $open){
 
-		$this->reportErrors[] = $newlog;
+		$key = count($this->reportErrors);
+
+		$this->reportErrors[$key]['error'] = $newlog;
+		$this->reportErrors[$key]['solve'] = $solve;
+		$this->reportErrors[$key]['open'] = $open;
 
 	}
 
 	// ADD LINE TO ARRAY
-	function reportWarnings($newlog){
+	function reportWarnings($newlog, $solve, $open){
 
-		$this->reportWarnings[] = $newlog;
+		$key = count($this->reportWarnings);
+
+		$this->reportWarnings[$key]['error'] = $newlog;
+		$this->reportWarnings[$key]['solve'] = $solve;
+		$this->reportWarnings[$key]['open'] = $open;
 
 	}
 
 	// SAVE JSON TO FILE
 	function reportsave(){
 
+		$date = date('Y-m-d H:i:s');
+
 		$report = json_encode(array_merge($this->reportErrors, $this->reportWarnings));
 
 		file_put_contents('report.md', $report);
+
+		$linesErros = '';
+		foreach ($this->reportErrors as $arr){
+
+			$linesErros .= <<<lines
+				<div class="line">
+					<div class="line-left"><span class="error">ERROR</span></div><div class="line-right"><a href="file://{$arr['open']}">{$arr['error']}</a></div>
+					<div class="line-left"><span class="fix">HOW TO FIX</span></div><div class="line-right">{$arr['solve']}</div>
+				</div>
+lines;
+
+		}
+
+		$linesWarnings = '';
+		foreach ($this->reportWarnings as $arr){
+
+			$linesWarnings .= <<<lines
+				<div class="line">
+					<div class="line-left"><span class="warning">WARNING</span></div><div class="line-right"><a href="file://{$arr['open']}">{$arr['error']}</a></div>
+					<div class="line-left"><span class="fix">HOW TO FIX</span></div><div class="line-right">{$arr['solve']}</div>
+				</div>
+lines;
+
+		}
+
+		$html = <<<html
+			<!DOCTYPE html>
+			<html>
+			<head>
+				<meta charset="utf-8" />
+				<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1, shrink-to-fit=no" />
+				<link rel="stylesheet" media="all" type="text/css" href="https://objetivasoftware.com.br/css/boss.min.css" />
+				<link rel="stylesheet" media="all" type="text/css" href="site.css" />
+				<title>SCAN REPORT</title>
+			</head>
+			<body>
+				<div class="content content_h content_v">		
+					<h1>PHP 7.2 Migration tool</h1>
+					<p>Report errors in {$date}</p>
+
+					{$linesErros}
+					{$linesWarnings}
+
+				</div>
+			</body>
+			</html>
+html;
+		file_put_contents('index.html', $html);
 
 	}
 
@@ -165,6 +223,12 @@ class Scan extends Erros{
 $reportFile = 'report.md';
 if(!is_file($reportFile)){
 	touch($reportFile);
+}
+
+// TOUCH FILE IF NOT EXISTS
+$htmlFile = 'index.html';
+if(!is_file($htmlFile)){
+	touch($htmlFile);
 }
 
 $scan = new Scan($parameters);

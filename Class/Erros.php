@@ -3,7 +3,7 @@
 /*{
 "VERSION": 1.14,
 "AUTHOR": "MOISES DE LIMA",
-"UPDATE": "14/08/2018"
+"UPDATE": "15/08/2018"
 }*/
 
 include 'Warnings.php';
@@ -32,9 +32,9 @@ class Erros extends Warnings{
 
 						$string = 'LINE: '.($ct + 1).' - METHODS WITH SAME NAME OF YOUR CLASS IN '.$currentFile;
 
-						$this->reportErrors($string);
-
 						$howtosolve = 'Rename your class name ou funcion name to fix it.';
+
+						$this->reportErrors($string, $howtosolve, $currentFile);
 
 						print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
 						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
@@ -65,9 +65,9 @@ class Erros extends Warnings{
 
 					$string = 'LINE: '.($ct + 1).' - __autoload IS DEPRECATED IN '.$currentFile;
 
-					$this->reportErrors($string);
-
 					$howtosolve = 'You can use spl_autoload_register() to fix it.';
+
+					$this->reportErrors($string, $howtosolve, $currentFile);
 
 					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
 					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
@@ -99,7 +99,8 @@ class Erros extends Warnings{
 
 					$howtosolve = <<<howtosolve
 You can use foreach() to fix it.
-
+<pre>
+<code>
 ## OLD CODE
 list(\$a, \$b) = each(\$array);
 
@@ -110,9 +111,11 @@ foreach(\$array as \$a => \$b){
 	\$aa = \$a;
 	\$bb = \$b;
 }
+</code>
+</pre>
 howtosolve;
 
-					$this->reportErrors($string);
+					$this->reportErrors($string, $howtosolve, $currentFile);
 
 					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
 					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
@@ -142,9 +145,9 @@ howtosolve;
 
 					$string = 'LINE: '.($ct + 1).' - png2wbmp() IS DEPRECATED IN '.$currentFile;
 
-					$this->reportErrors($string);
-
 					$howtosolve = 'Use imagecreatefrompng() and imagewbmp() instead.';
+
+					$this->reportErrors($string, $howtosolve, $currentFile);
 
 					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
 					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
@@ -174,9 +177,9 @@ howtosolve;
 
 					$string = 'LINE: '.($ct + 1).' - jpeg2wbmp() IS DEPRECATED IN '.$currentFile;
 
-					$this->reportErrors($string);
-
 					$howtosolve = 'Use imagecreatefromjpeg() and imagewbmp() instead.';
+
+					$this->reportErrors($string, $howtosolve, $currentFile);
 
 					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
 					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
@@ -206,9 +209,9 @@ howtosolve;
 
 					$string = 'LINE: '.($ct + 1).' - create_function() FUNCTION IS DEPRECATED IN '.$currentFile;
 
-					$this->reportErrors($string);
-
 					$howtosolve = 'Do panic.';
+
+					$this->reportErrors($string, $howtosolve, $currentFile);
 
 					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
 					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
@@ -237,9 +240,9 @@ howtosolve;
 
 					$string = 'LINE: '.($ct + 1).' - gmp_random() FUNCTION IS DEPRECATED IN '.$currentFile;
 
-					$this->reportErrors($string);
-
 					$howtosolve = 'Use gmp_random_bits() or gmp_random_range() instead.';
+
+					$this->reportErrors($string, $howtosolve, $currentFile);
 
 					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
 					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
@@ -268,9 +271,9 @@ howtosolve;
 					$count = $count + 1;
 					$string = 'LINE: '.($ct + 1).' - read_exif_data() FUNCTION IS DEPRECATED IN '.$currentFile;
 
-					$this->reportErrors($string);
-
 					$howtosolve = 'read_exif_data() function is a Alias, please use exif_read_data() instead.';
+
+					$this->reportErrors($string, $howtosolve, $currentFile);
 
 					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
 					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
@@ -299,9 +302,9 @@ howtosolve;
 					$count = $count + 1;
 					$string = 'LINE: '.($ct + 1).' - mysql_select_db() FUNCTION IS DEPRECATED IN '.$currentFile;
 
-					$this->reportErrors($string);
-
 					$howtosolve = 'Change to PDO';
+
+					$this->reportErrors($string, $howtosolve, $currentFile);
 
 					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
 					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
@@ -330,9 +333,9 @@ howtosolve;
 					$count = $count + 1;
 					$string = 'LINE: '.($ct + 1).' - mysql_connect() FUNCTION IS DEPRECATED IN '.$currentFile;
 
-					$this->reportErrors($string);
-
 					$howtosolve = 'Change to PDO';
+
+					$this->reportErrors($string, $howtosolve, $currentFile);
 
 					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
 					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
@@ -361,9 +364,9 @@ howtosolve;
 					$count = $count + 1;
 					$string = 'LINE: '.($ct + 1).' - mysql_query() FUNCTION IS DEPRECATED IN '.$currentFile;
 
-					$this->reportErrors($string);
-
 					$howtosolve = 'Change to PDO';
+
+					$this->reportErrors($string, $howtosolve, $currentFile);
 
 					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
 					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
@@ -392,9 +395,9 @@ howtosolve;
 					$count = $count + 1;
 					$string = 'LINE: '.($ct + 1).' - mysql_num_rows() FUNCTION IS DEPRECATED IN '.$currentFile;
 
-					$this->reportErrors($string);
-
 					$howtosolve = 'Change to PDO';
+
+					$this->reportErrors($string, $howtosolve, $currentFile);
 
 					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
 					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
@@ -423,9 +426,9 @@ howtosolve;
 					$count = $count + 1;
 					$string = 'LINE: '.($ct + 1).' - mysql_result() FUNCTION IS DEPRECATED IN '.$currentFile;
 
-					$this->reportErrors($string);
-
 					$howtosolve = 'Change to PDO';
+
+					$this->reportErrors($string, $howtosolve, $currentFile);
 
 					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
 					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;

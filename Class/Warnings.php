@@ -3,7 +3,7 @@
 /*{
 "VERSION": 1.14,
 "AUTHOR": "MOISES DE LIMA",
-"UPDATE": "14/08/2018"
+"UPDATE": "15/08/2018"
 }*/
 
 class Warnings{
@@ -26,9 +26,9 @@ class Warnings{
 
 					$string = 'LINE: '.($ct + 1).' - md5() FUNCTION CAN BE DEPRECATED IN 7.3 OR 8'.$currentFile;
 
-					$this->reportWarnings($string);
-
 					$howtosolve = 'Follow the news of PHP.';
+
+					$this->reportWarnings($string, $howtosolve, $currentFile);
 
 					print $this->colors->getColoredString('WARNING', 'black', 'yellow').' '.$string.PHP_EOL;
 					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
@@ -58,9 +58,9 @@ class Warnings{
 
 					$string = 'LINE: '.($ct + 1).' - strip_tags() FUNCTION CAN BE DEPRECATED IN 7.3 OR 8'.$currentFile;
 
-					$this->reportWarnings($string);
-
 					$howtosolve = 'Follow the news of PHP.';
+
+					$this->reportWarnings($string, $howtosolve, $currentFile);
 
 					print $this->colors->getColoredString('WARNING', 'black', 'yellow').' '.$string.PHP_EOL;
 					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
@@ -88,11 +88,11 @@ class Warnings{
 
 					$count = $count + 1;
 
-					$string = 'LINE: '.($ct + 1).' - DO NOT END YOUR PHP 7.2 WITH ?> TAG'.$currentFile;
-
-					$this->reportWarnings($string);
+					$string = 'LINE: '.($ct + 1).' - DO NOT END YOUR PHP 7.2 WITH ?> TAG '.$currentFile;
 
 					$howtosolve = 'Stop merge html into PHP.';
+
+					$this->reportWarnings($string, $howtosolve, $currentFile);
 
 					print $this->colors->getColoredString('WARNING', 'black', 'yellow').' '.$string.PHP_EOL;
 					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
