@@ -36,9 +36,12 @@ class Erros extends Warnings{
 
 						$this->reportErrors($string, $howtosolve, $currentFile);
 
-						print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
-						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+						if($this->_findParam('q') === false){
 
+							print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+							print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+						}
 					}
 				}
 			}
@@ -69,9 +72,12 @@ class Erros extends Warnings{
 
 					$this->reportErrors($string, $howtosolve, $currentFile);
 
-					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
-					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					if($this->_findParam('q') === false){
 
+						print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+					}
 				}
 			}
 		}
@@ -110,6 +116,7 @@ list(\$a, \$b) = each(\$array);
 foreach(\$array as \$a => \$b){
 	\$aa = \$a;
 	\$bb = \$b;
+	break;
 }
 </code>
 </pre>
@@ -117,9 +124,12 @@ howtosolve;
 
 					$this->reportErrors($string, $howtosolve, $currentFile);
 
-					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
-					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					if($this->_findParam('q') === false){
 
+						print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+					}
 				}
 			}
 		}
@@ -149,9 +159,12 @@ howtosolve;
 
 					$this->reportErrors($string, $howtosolve, $currentFile);
 
-					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
-					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					if($this->_findParam('q') === false){
 
+						print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+					}
 				}
 			}
 		}
@@ -181,9 +194,12 @@ howtosolve;
 
 					$this->reportErrors($string, $howtosolve, $currentFile);
 
-					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
-					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					if($this->_findParam('q') === false){
 
+						print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+					}
 				}
 			}
 		}
@@ -213,8 +229,11 @@ howtosolve;
 
 					$this->reportErrors($string, $howtosolve, $currentFile);
 
-					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
-					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					if($this->_findParam('q') === false){
+
+						print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					}
 				}
 			}
 		}
@@ -244,9 +263,12 @@ howtosolve;
 
 					$this->reportErrors($string, $howtosolve, $currentFile);
 
-					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
-					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					if($this->_findParam('q') === false){
 
+						print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+					}
 				}
 			}
 		}
@@ -275,9 +297,12 @@ howtosolve;
 
 					$this->reportErrors($string, $howtosolve, $currentFile);
 
-					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
-					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					if($this->_findParam('q') === false){
 
+						print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+					}
 				}
 			}
 		}
@@ -306,9 +331,12 @@ howtosolve;
 
 					$this->reportErrors($string, $howtosolve, $currentFile);
 
-					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
-					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					if($this->_findParam('q') === false){
 
+						print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+					}
 				}
 			}
 		}
@@ -337,9 +365,12 @@ howtosolve;
 
 					$this->reportErrors($string, $howtosolve, $currentFile);
 
-					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
-					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					if($this->_findParam('q') === false){
 
+						print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+					}
 				}
 			}
 		}
@@ -368,9 +399,12 @@ howtosolve;
 
 					$this->reportErrors($string, $howtosolve, $currentFile);
 
-					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
-					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					if($this->_findParam('q') === false){
 
+						print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+					}
 				}
 			}
 		}
@@ -399,9 +433,12 @@ howtosolve;
 
 					$this->reportErrors($string, $howtosolve, $currentFile);
 
-					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
-					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					if($this->_findParam('q') === false){
 
+						print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+					}
 				}
 			}
 		}
@@ -430,9 +467,11 @@ howtosolve;
 
 					$this->reportErrors($string, $howtosolve, $currentFile);
 
-					print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
-					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					if($this->_findParam('q') === false){
 
+						print $this->colors->getColoredString('ERROR', 'white', 'red').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					}
 				}
 			}
 		}

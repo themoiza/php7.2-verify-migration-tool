@@ -30,9 +30,12 @@ class Warnings{
 
 					$this->reportWarnings($string, $howtosolve, $currentFile);
 
-					print $this->colors->getColoredString('WARNING', 'black', 'yellow').' '.$string.PHP_EOL;
-					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					if($this->_findParam('q') === false){
 
+						print $this->colors->getColoredString('WARNING', 'black', 'yellow').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+					}
 				}
 			}
 		}
@@ -62,9 +65,12 @@ class Warnings{
 
 					$this->reportWarnings($string, $howtosolve, $currentFile);
 
-					print $this->colors->getColoredString('WARNING', 'black', 'yellow').' '.$string.PHP_EOL;
-					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					if($this->_findParam('q') === false){
 
+						print $this->colors->getColoredString('WARNING', 'black', 'yellow').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+					}
 				}
 			}
 		}
@@ -94,9 +100,12 @@ class Warnings{
 
 					$this->reportWarnings($string, $howtosolve, $currentFile);
 
-					print $this->colors->getColoredString('WARNING', 'black', 'yellow').' '.$string.PHP_EOL;
-					print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+					if($this->_findParam('q') === false){
 
+						print $this->colors->getColoredString('WARNING', 'black', 'yellow').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+					}
 				}
 			}
 		}
