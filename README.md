@@ -32,6 +32,11 @@ w: scan only warnings
 ./scan.php w
 ```
 
+q: quiet, show nothing on console
+```sh
+./scan.php q
+```
+
 all: scan all
 ```sh
 ./scan.php all
