@@ -195,6 +195,7 @@ html;
 						$count = $this->fn_md5($currentFile, $count);
 						$count = $this->fn_strip_tags($currentFile, $count);
 						$count = $this->fn_endphptag($currentFile, $count);
+						$count = $this->fn_mb_strings($currentFile, $count);
 
 					}
 				}

@@ -112,4 +112,39 @@ class Warnings{
 
 		return $count;
 	}
+
+	function fn_mb_strings($currentFile, $count){
+
+		if(is_file($currentFile)){
+
+			$php = file_get_contents($currentFile);
+
+			$lines = $this->__getLines($php);
+
+			foreach ($lines as $ct => $line){
+
+				preg_match('/mb_str[a-z]+[\s\t\n]?\(/', $line, $preg);
+
+				if(!empty($preg)){
+
+					$count = $count + 1;
+
+					$string = 'LINE: '.($ct + 1).' - mb_ prefix on string functions can br deprecated in PHP > 7.2 '.$currentFile;
+
+					$howtosolve = 'Use if(function_exists(\'mb_xxxx\')) to route mb_ or not mb_ prefix.';
+
+					$this->reportWarnings($string, $howtosolve, $currentFile);
+
+					if($this->_findParam('q') === false){
+
+						print $this->colors->getColoredString('WARNING', 'black', 'yellow').' '.$string.PHP_EOL;
+						print $this->colors->getColoredString('HOW TO FIX: ', "white", "blue").' '.$howtosolve.PHP_EOL.PHP_EOL;
+
+					}
+				}
+			}
+		}
+
+		return $count;
+	}
 }
