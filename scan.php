@@ -4,7 +4,7 @@
 /*{
 "VERSION": 1.16,
 "AUTHOR": "MOISES DE LIMA",
-"UPDATE": "16/08/2018"
+"UPDATE": "05/01/2024"
 "GITHUB" : "https://github.com/themoiza/php7.2-verify-migration-tool"
 }*/
 
@@ -120,35 +120,34 @@ lines;
 		foreach ($this->reportWarnings as $arr){
 
 			$linesWarnings .= <<<lines
-				<div class="line">
-					<div class="line-left"><span class="warning">WARNING</span></div><div class="line-right"><a href="file://{$arr['open']}">{$arr['error']}</a></div>
-					<div class="line-left"><span class="fix">HOW TO FIX</span></div><div class="line-right">{$arr['solve']}</div>
-				</div>
+		<div class="line">
+			<div class="line-left"><span class="warning">WARNING</span></div><div class="line-right"><a href="file://{$arr['open']}">{$arr['error']}</a></div>
+			<div class="line-left"><span class="fix">HOW TO FIX</span></div><div class="line-right">{$arr['solve']}</div>
+		</div>
 lines;
 
 		}
 
 		$html = <<<html
-			<!DOCTYPE html>
-			<html>
-			<head>
-				<meta charset="utf-8" />
-				<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1, shrink-to-fit=no" />
-				<link rel="stylesheet" media="all" type="text/css" href="https://objetivasoftware.com.br/css/boss.min.css" />
-				<link rel="stylesheet" media="all" type="text/css" href="site.css" />
-				<title>SCAN REPORT</title>
-			</head>
-			<body>
-				<div class="content content_h content_v">		
-					<h1>PHP 7.2 Migration tool</h1>
-					<p>Report errors in {$date}</p>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1, shrink-to-fit=no" />
+	<link rel="stylesheet" media="all" type="text/css" href="site.css" />
+	<title>SCAN REPORT</title>
+</head>
+<body>
+	<div class="content content_h content_v">		
+		<h1>PHP 7.2 Migration tool</h1>
+		<p>Report errors in {$date}</p>
 
-					{$linesErros}
-					{$linesWarnings}
+		{$linesErros}
+		{$linesWarnings}
 
-				</div>
-			</body>
-			</html>
+	</div>
+</body>
+</html>
 html;
 		file_put_contents('index.html', $html);
 
